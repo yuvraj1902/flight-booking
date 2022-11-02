@@ -8,6 +8,7 @@ db.connect((err)=>{
     if(err) return err
     else{
         console.log("Db connected");
+        console.log("Lets Go");
     }
 })
 app.use(express.json())
