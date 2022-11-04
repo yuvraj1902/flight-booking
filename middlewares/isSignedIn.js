@@ -1,9 +1,9 @@
 var { expressjwt: jwt } = require("express-jwt");
 
-const isSignedIn =jwt({
-secret: 'secret',
-algorithms: ["HS256"],
-userProperty:"auth"
+const isSignedIn = jwt({
+    secret: 'secret',
+    algorithms: ["HS256"],
+    userProperty: "auth"
 });
 
-module.exports=isSignedIn
+module.exports = isSignedIn
