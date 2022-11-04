@@ -1,49 +1,27 @@
-const {createUser,getUser,checkUser}=require("../services/user.service")
-const bcrypt=require('bcrypt')
-const jwt=require('jsonwebtoken')
+const { createUser, getUser, checkUser } = require("../services/user.service")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const db = require("../connection")
-    const createUsers=(req,res)=>{
-        createUser(req.body,(err,result,resp)=>{
-            if(err) return res.status(resp).json({error:err})
-            else return res.status(resp).json({
-                message:result
-            })
+const createUsers = (req, res) => {
+    createUser(req.body, (err, result, resp) => {
+        if (err) return res.status(resp).json({ error: err })
+        else return res.status(resp).json({
+            message: result
         })
-    }
-
-const getUsers=(req,res)=>{
-    
-    getUser((err,result,resp)=>{
-        if(err) return res.status(resp).json({
-            error:err
-        })
-            return res.status(resp).json(result)
     })
-} 
+}
 
-// const checkUsers=(req,res)=>{
-//     checkUser(req.body,(err,result,resp)=>{
-//         if(err) return res.status(resp).json({
-//             error:err
-//         })
-//         const obj={
-//             email:req.body.email,
-//             password:req.body.password
-//         }
-        
-//         console.log(result);
+const getUsers = (req, res) => {
 
-//         let validate_password = bcrypt.compareSync(req.body.password,result[0].password);
-//         if(validate_password){
-//         const token=jwt.sign(obj,'secret');
-//         res.cookie("token",token)
-//         return res.status(resp).json({
-//             message:result,
-//             token:token
-//         })
-//     }
-//     })
-// }
+    getUser((err, result, resp) => {
+        if (err) return res.status(resp).json({
+            error: err
+        })
+        return res.status(resp).json(result)
+    })
+}
+
+
 
 const checkUsers = (req, res) => {
     let email = req.body.email;
@@ -63,16 +41,17 @@ const checkUsers = (req, res) => {
                         message: "user not found"
                     });
                 }
-                console.log(result[0].password)
-                const obj={
-                    email:email,
-                    password:result[0].password
-                   }
+                console.log(password)
+                const obj = {
+                    id: result[0].id,
+                    email: email,
+                    password: password
+                }
                 let verify_pass = bcrypt.compareSync(password, result[0].password);
                 if (verify_pass) {
-                   
+
                     const token = jwt.sign(obj, 'secret');
-                    res.cookie("token", token, { expire: new Date() + 100000 });
+                    res.cookie("token", token, { expires: new Date(new Date().getTime() + 360 * 60 * 1000) });
                     return res.status(200).json({
                         message: "login successfully",
                         token: token
@@ -84,11 +63,11 @@ const checkUsers = (req, res) => {
                     });
                 }
             }
-            else{
-            res.status(500).json({
-                message: "internal server error"
-            })
-        }
+            else {
+                res.status(500).json({
+                    message: "internal server error"
+                })
+            }
         })
 
     }
@@ -99,4 +78,4 @@ const checkUsers = (req, res) => {
 
 }
 
-    module.exports={createUsers,getUsers,checkUsers}
+module.exports = { createUsers, getUsers, checkUsers }

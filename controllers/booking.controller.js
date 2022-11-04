@@ -1,10 +1,10 @@
-const { createRoute, getRoute, deleteRoute } = require("../services/routes.service")
+const { createBooking, getBooking, deleteBooking } = require("../services/booking.service")
 
 const db = require("../connection")
 
 
-const createRoutes = (req, res) => {
-    createRoute(req.body, (err, result, resp) => {
+const createBookings = (req, res) => {
+    createBooking(req, req.body, (err, result, resp) => {
         if (err) return res.status(resp).json({ error: err })
         else return res.status(resp).json({
             message: result
@@ -12,8 +12,8 @@ const createRoutes = (req, res) => {
     })
 }
 
-const getRoutes = (req, res) => {
-    getRoute((err, result, resp) => {
+const getBookings = (req, res) => {
+    getBooking((err, result, resp) => {
         if (err) return res.status(resp).json({
             error: err
         })
@@ -22,8 +22,8 @@ const getRoutes = (req, res) => {
 }
 
 
-const deleteRoutes = (req, res) => {
-    deleteRoute(req.query, (err, result, resp) => {
+const deleteBookings = (req, res) => {
+    deleteBooking(req.query, (err, result, resp) => {
         if (err) return res.status(resp).json({
             error: err
         })
@@ -33,4 +33,4 @@ const deleteRoutes = (req, res) => {
 
 
 
-module.exports = { createRoutes, getRoutes, deleteRoutes }
+module.exports = { createBookings, getBookings, deleteBookings }

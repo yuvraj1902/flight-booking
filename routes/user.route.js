@@ -1,14 +1,14 @@
-const express=require('express')
-const router=express.Router()
-const {createUsers,getUsers, checkUsers}=require("../controllers/user.controller")
-const isSignedIn=require("../middlewares/isSignedIn")
-const isAdmin=require("../middlewares/isAdmin")
-router.post("/signup",createUsers)
+const express = require('express')
+const router = express.Router()
+const { createUsers, getUsers, checkUsers } = require("../controllers/user.controller")
+const isSignedIn = require("../middlewares/isSignedIn")
+const isAdmin = require("../middlewares/isAdmin")
+router.post("/signup", createUsers)
 
-router.post("/login",checkUsers)
+router.post("/login", checkUsers)
 
-router.get("/users",isSignedIn,getUsers)
+router.get("/users", isSignedIn, isAdmin, getUsers)
 
 
 
-module.exports=router
+module.exports = router

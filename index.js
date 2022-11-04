@@ -11,6 +11,8 @@ const userRouter=require("./routes/user.route")
 const flightRouter=require("./routes/flight.route")
 const couponRouter=require("./routes/coupon.route")
 const routeFlightRouter=require("./routes/routeFlight.route")
+const bookingRouter=require("./routes/booking.route")
+const paymentRouter=require("./routes/payment.route")
 db.connect((err)=>{
     if(err) return err
     else{
@@ -26,6 +28,8 @@ app.use("/api",routeRouter)
 app.use("/api",flightRouter)
 app.use("/api",couponRouter)
 app.use("/api",routeFlightRouter)
+app.use("/api",bookingRouter)
+app.use("/api",paymentRouter)
 const PORT=process.env.port
 app.listen(PORT,()=>{
     console.log(`Port is listening on ${PORT}`);
