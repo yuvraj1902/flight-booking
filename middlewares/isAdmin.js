@@ -4,6 +4,7 @@ const admin = {
     password: "yuvi"
 }
 const db = require('../connection')
+
 const isAdmin = (req, res, next) => {
     if (req.auth.id == admin.id) {
         next();
@@ -13,5 +14,4 @@ const isAdmin = (req, res, next) => {
         })
     }
 }
-
 module.exports = isAdmin

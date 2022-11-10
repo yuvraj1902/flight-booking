@@ -1,7 +1,5 @@
 const routeFlight = require("../services/routeFlight.service")
 
-
-
 const routeFlights = (req, res) => {
     routeFlight(req.body, (err, result, resp) => {
         if (err) return res.status(resp).json({ error: err })

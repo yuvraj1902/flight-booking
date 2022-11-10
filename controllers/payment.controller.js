@@ -1,7 +1,5 @@
 const { createPayment, getPayment, deletePayment } = require("../services/payment.service")
-
 const db = require("../connection")
-
 
 const createPayments = (req, res) => {
     createPayment(req.body, (err, result, resp) => {
@@ -21,7 +19,6 @@ const getPayments = (req, res) => {
     })
 }
 
-
 const deletePayments = (req, res) => {
     deletePayment(req.query, (err, result, resp) => {
         if (err) return res.status(resp).json({
@@ -30,7 +27,4 @@ const deletePayments = (req, res) => {
         return res.status(resp).json(result)
     })
 }
-
-
-
 module.exports = { createPayments, getPayments, deletePayments }

@@ -15,16 +15,9 @@ const createUser = (data, callBack) => {
 
 const getUser = (callBack) => {
     db.query("select * from user", (err, result) => {
-
-        if (err) return callBack(err, null, 500)
+    if (err) return callBack(err, null, 500)
         return callBack(null, result, 200)
     })
-
 }
-
-
-
-
-
 
 module.exports = { createUser, getUser }

@@ -1,7 +1,5 @@
 const { createRoute, getRoute, deleteRoute } = require("../services/routes.service")
-
 const db = require("../connection")
-
 
 const createRoutes = (req, res) => {
     createRoute(req.body, (err, result, resp) => {
@@ -21,7 +19,6 @@ const getRoutes = (req, res) => {
     })
 }
 
-
 const deleteRoutes = (req, res) => {
     deleteRoute(req.query, (err, result, resp) => {
         if (err) return res.status(resp).json({
@@ -30,7 +27,4 @@ const deleteRoutes = (req, res) => {
         return res.status(resp).json(result)
     })
 }
-
-
-
 module.exports = { createRoutes, getRoutes, deleteRoutes }

@@ -1,7 +1,5 @@
 const { createCoupon, getCoupon, deleteCoupon } = require("../services/coupon.service")
-
 const db = require("../connection")
-
 
 const createCoupons = (req, res) => {
     createCoupon(req.body, (err, result, resp) => {
@@ -21,7 +19,6 @@ const getCoupons = (req, res) => {
     })
 }
 
-
 const deleteCoupons = (req, res) => {
     deleteCoupon(req.query, (err, result, resp) => {
         if (err) return res.status(resp).json({
@@ -30,7 +27,4 @@ const deleteCoupons = (req, res) => {
         return res.status(resp).json(result)
     })
 }
-
-
-
 module.exports = { createCoupons, getCoupons, deleteCoupons }

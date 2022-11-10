@@ -4,7 +4,6 @@ const app=express()
 const dotenv=require('dotenv')
 const cookieParser=require('cookie-parser')
 const bodyParser=require('body-parser')
-
 dotenv.config()
 const routeRouter=require("./routes/routes.route")
 const userRouter=require("./routes/user.route")

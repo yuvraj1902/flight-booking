@@ -2,6 +2,7 @@ const { createUser, getUser, checkUser } = require("../services/user.service")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const db = require("../connection")
+
 const createUsers = (req, res) => {
     createUser(req.body, (err, result, resp) => {
         if (err) return res.status(resp).json({ error: err })
@@ -12,7 +13,6 @@ const createUsers = (req, res) => {
 }
 
 const getUsers = (req, res) => {
-
     getUser((err, result, resp) => {
         if (err) return res.status(resp).json({
             error: err
@@ -21,19 +21,15 @@ const getUsers = (req, res) => {
     })
 }
 
-
-
 const checkUsers = (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
-
     if (email == "" || password == "") {
         return res.status(400).json({
             message: "please enter all the required fields"
         });
     }
-
-    try {
+     try {
         db.query("SELECT * FROM user WHERE email = ?", [email], (err, result) => {
             if (!err) {
                 if (result.length == 0) {
@@ -77,5 +73,4 @@ const checkUsers = (req, res) => {
     }
 
 }
-
 module.exports = { createUsers, getUsers, checkUsers }

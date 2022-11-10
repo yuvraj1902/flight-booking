@@ -10,8 +10,4 @@ const db=mysql.createConnection({
     multipleStatements:true
 })
 
-
-
-
-
 module.exports=db
