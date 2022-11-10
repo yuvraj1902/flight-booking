@@ -1,7 +1,5 @@
 const { createBooking, getBooking, deleteBooking } = require("../services/booking.service")
-
 const db = require("../connection")
-
 
 const createBookings = (req, res) => {
     createBooking(req, req.body, (err, result, resp) => {
@@ -21,7 +19,6 @@ const getBookings = (req, res) => {
     })
 }
 
-
 const deleteBookings = (req, res) => {
     deleteBooking(req.query, (err, result, resp) => {
         if (err) return res.status(resp).json({
@@ -30,7 +27,4 @@ const deleteBookings = (req, res) => {
         return res.status(resp).json(result)
     })
 }
-
-
-
 module.exports = { createBookings, getBookings, deleteBookings }

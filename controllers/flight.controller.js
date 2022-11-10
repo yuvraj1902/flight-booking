@@ -1,7 +1,5 @@
 const { createFlight, getFlight, deleteFlight } = require("../services/flight.service")
-
 const db = require("../connection")
-
 
 const createFlights = (req, res) => {
     createFlight(req.body, (err, result, resp) => {
@@ -21,7 +19,6 @@ const getFlights = (req, res) => {
     })
 }
 
-
 const deleteFlights = (req, res) => {
     deleteFlight(req.query, (err, result, resp) => {
         if (err) return res.status(resp).json({
@@ -30,7 +27,4 @@ const deleteFlights = (req, res) => {
         return res.status(resp).json(result)
     })
 }
-
-
-
 module.exports = { createFlights, getFlights, deleteFlights }
