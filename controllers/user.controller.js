@@ -29,7 +29,7 @@ const checkUsers = (req, res) => {
             message: "please enter all the required fields"
         });
     }
-     try {
+    try {
         db.query("SELECT * FROM user WHERE email = ?", [email], (err, result) => {
             if (!err) {
                 if (result.length == 0) {
@@ -45,7 +45,6 @@ const checkUsers = (req, res) => {
                 }
                 let verify_pass = bcrypt.compareSync(password, result[0].password);
                 if (verify_pass) {
-
                     const token = jwt.sign(obj, 'secret');
                     res.cookie("token", token, { expires: new Date(new Date().getTime() + 360 * 60 * 1000) });
                     return res.status(200).json({
@@ -54,7 +53,7 @@ const checkUsers = (req, res) => {
                     });
                 }
                 else {
-                    return res.status(400).json({
+                        return res.status(400).json({
                         message: "incorrect password"
                     });
                 }
